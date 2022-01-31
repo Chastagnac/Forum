@@ -20,7 +20,7 @@ $estConnecte = estConnecte();
 require 'vues/v_entete.php';
 $uc = filter_input(INPUT_GET, 'uc', FILTER_SANITIZE_STRING);
 if ($uc && !$estConnecte) {
-    $uc = 'connexion';
+    $uc = 'accueil';
 } elseif (empty($uc)) {
     $uc = 'accueil';
 }

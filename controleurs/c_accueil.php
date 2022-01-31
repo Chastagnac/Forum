@@ -9,8 +9,4 @@
  * @link      http://www.php.net/manual/fr/book.pdo.php PHP Data Objects sur php.net
  */
 
-if ($estConnecte) {
-    include 'vues/v_accueil.php';
-} else {
-    include 'vues/v_connexion.php';
-}
+include 'vues/v_accueil.php';
