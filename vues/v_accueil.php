@@ -22,7 +22,6 @@
     
          <div class="map">
             <div class="content">
-          
                <ul class="movies">
                <h3>Films <span>Récents</span></h3>
                   <li>

@@ -31,7 +31,7 @@ class PdoWiki
 {
 
     private static $serveur = 'mysql:host=localhost';
-    private static $bdd = 'dbname=wiki_fiche';
+    private static $bdd = 'dbname=forum';
     private static $user = 'root';
     private static $mdp = '';
     private static $monPdo;
@@ -118,16 +118,14 @@ class PdoWiki
      *
      * @return l'id, le nom, le prénom, le mail, le mdp et la date de création sous la forme d'un tableau associatif
      */
-    public function getInfosCompteById($idCompte)
+    public function getInfosCompteById()
     {
         $requetePrepare = PdoWiki::$monPdo->prepare(
             'SELECT compte.id AS id, compte.nom AS nom, '
                 . 'compte.prenom AS prenom, compte.mail AS mail, '
-                . 'compte.mdp AS mdp, compte.datecreation, '
-                . 'compte.datemodif AS datemodif, '
+                . 'compte.mdp AS mdp, '
                 . 'compte.role AS role, compte.xp AS xp '
                 . 'FROM compte '
-                . 'WHERE compte.id = :unId'
         );
         $requetePrepare->bindParam(':unId', $idCompte, PDO::PARAM_STR);
         $requetePrepare->execute();
@@ -474,8 +472,8 @@ class PdoWiki
     function register($prenom, $nom, $mdp, $mail)
     {
         $requetePrepare = PdoWiki::$monPdo->prepare(
-            'INSERT INTO `compte`(`id`, `prenom`, `nom`, `mdp`, `mail`, `datecreation`) '
-                . 'VALUES (DEFAULT, :unPrenom, :unNom, :unMdp, :unMail, DATE(NOW()))'
+            'INSERT INTO `compte`(`id`, `prenom`, `nom`, `mdp`, `mail`,`role`,`xp`) '
+                . 'VALUES (DEFAULT, :unPrenom, :unNom, :unMdp, :unMail, DEFAULT, DEFAULT)'
         );
         $requetePrepare->bindParam(':unPrenom', $prenom, PDO::PARAM_STR);
         $requetePrepare->bindParam(':unNom', $nom, PDO::PARAM_STR);

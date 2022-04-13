@@ -9,7 +9,7 @@
  * @link      http://www.php.net/manual/fr/book.pdo.php PHP Data Objects sur php.net
  */
 
-$action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
+$action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 if (!$uc) {
     $uc = 'demandeconnexion';
 }
@@ -18,23 +18,9 @@ switch ($action) {
     case 'demandeConnexion':
         include 'vues/v_connexion.php';
         break;
-    case 'visiteur':
-        $mail = "visiteur@gmail.com";
-        $mdp = "visiteur";
-        $compte = $pdo->getInfosCompte($mail, $mdp);
-        if (is_array($compte)) {
-            $id = $compte['id'];
-            $nom = $compte['nom'];
-            $prenom = $compte['prenom'];
-            $role = $compte['role'];
-            $xp = $compte['xp'];
-            connecter($id, $nom, $prenom, $role, $xp);
-            header('Location: index.php');
-        }
-        break;
     case 'valideConnexion':
-        $mail = filter_input(INPUT_POST, 'mail', FILTER_SANITIZE_STRING);
-        $mdp = filter_input(INPUT_POST, 'mdp', FILTER_SANITIZE_STRING);
+        $mail = filter_input(INPUT_POST, 'mail', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $mdp = filter_input(INPUT_POST, 'mdp', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $compte = $pdo->getInfosCompte($mail, $mdp);
         if (is_array($compte)) {
             $id = $compte['id'];
@@ -57,12 +43,13 @@ switch ($action) {
         include 'vues/v_forgotPassword.php';
         break;
     case 'register':
-        $nom = filter_input(INPUT_POST, 'nom', FILTER_SANITIZE_STRING);
-        $prenom = filter_input(INPUT_POST, 'prenom', FILTER_SANITIZE_STRING);
-        $mail = filter_input(INPUT_POST, 'mail', FILTER_SANITIZE_STRING);
-        $mdp = filter_input(INPUT_POST, 'mdp', FILTER_SANITIZE_STRING);
-        $mdp2 = filter_input(INPUT_POST, 'mdp2', FILTER_SANITIZE_STRING);
+        $nom = filter_input(INPUT_POST, 'nom', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $prenom = filter_input(INPUT_POST, 'prenom', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $mail = filter_input(INPUT_POST, 'mail', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $mdp = filter_input(INPUT_POST, 'mdp', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $mdp2 = filter_input(INPUT_POST, 'mdp2', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         valideEnregistrement($nom, $prenom, $mail, $mdp, $mdp2);
+        $infos = $pdo->getInfosCompte($mail, $mdp);
         if (nbErreurs() != 0) {
             include 'vues/v_connexion.php';
             include 'vues/v_erreurs.php';

@@ -18,13 +18,14 @@ session_start();
 $pdo = PdoWiki::getPdoWiki();
 $estConnecte = estConnecte();
 require 'vues/v_entete.php';
-$uc = filter_input(INPUT_GET, 'uc', FILTER_SANITIZE_STRING);
-if ($uc && !$estConnecte) {
-    $uc = 'accueil';
-} elseif (empty($uc)) {
-    $uc = 'accueil';
-}
-switch ($uc) {
+$uc = $_GET['uc'];
+// if ($uc && !$estConnecte) {
+//     $uc = 'accueil';
+// } elseif (empty($uc)) {
+//     $uc = 'connexion';
+// }
+
+switch ('discussion') {
     case 'connexion':
         include 'controleurs/c_connexion.php';
         break;
@@ -40,8 +41,8 @@ switch ($uc) {
     case 'gererCompte':
         include 'controleurs/c_gererCompte.php';
         break;
-    case 'etatFiche':
-        include 'controleurs/c_etatFiche.php';
+    case 'discussion':
+        include 'controleurs/c_gererDiscussion.php';
         break;
     case 'controlerFiche':
         include 'controleurs/c_controlerFiche.php';

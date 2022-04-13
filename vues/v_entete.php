@@ -26,17 +26,15 @@
 
     <header class="header">
         <?php
-        $uc = filter_input(INPUT_GET, 'uc', FILTER_SANITIZE_STRING);
+        $uc = filter_input(INPUT_GET, 'uc', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         ?>
         <a href="index.php" class="logo">
             <img src="images/logo.png" alt="">
         </a>
-
         <nav class="navbar">
-            <a href="index.php" <?php if (!$uc || $uc == 'accueil') { ?>class="active" <?php } ?>>Accueil</a>
-            <a href="index.php?uc=gererFiche&action=selectionnerFiche" <?php if (!$uc || $uc == 'gererFiche') { ?>class="active" <?php } ?>>Discussion</a>
+            <a href="index.php?uc=gererFiche&action=selectionnerFiche" <?php if (!$uc || $uc == 'accueil') { ?>class="active" <?php } ?>>Accueil</a>
+            <a href="index.php?uc=discussion&action=home">Discussion</a>
         </nav>
-
         <div class="icons">
             <?php if (estConnecte()) { ?>
                 <a href="index.php?uc=gererCompte&action=mesInformations"> <i class="fa fa-user fa-3x"></i></a>
