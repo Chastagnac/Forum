@@ -13,9 +13,10 @@
 $idCompte = $_SESSION['idCompte'];
 $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
 $infosCompte = $pdo->getInfosCompteById($idCompte);
-include('vues/v_monCompte.php');
+
 switch ($action) {
     case 'mesInformations':
+        $comptes = $pdo->getAllAccounts();
         include('vues/v_mesInformations.php');
         break;
     case 'validerModifications':

@@ -95,6 +95,11 @@ function getMois($date)
     return $annee . $mois;
 }
 
+
+
+function getCategorie($idCateg) {
+    
+}
 /**
  * Retourne la date actuelle
  * 
@@ -218,7 +223,11 @@ function valideEnregistrement($nom, $prenom, $mail, $mdp, $mdp2)
         }
     }
 }
-
+function console_log( $data ){
+    echo '<script>';
+    echo 'console.log('. json_encode( $data ) .')';
+    echo '</script>';
+}
 /**
  * Vérifie la validité des trois arguments : le mail, le mdp et le nouveau mdp
  *

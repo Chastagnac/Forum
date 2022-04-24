@@ -37,7 +37,7 @@ class PdoWiki
     private static $monPdo;
     private static $monPdoWiki = null;
 
-    
+
     // private static $serveur = 'mysql:host=mysql-chastagnac.alwaysdata.net';
     // private static $bdd = 'dbname=chastagnac_wiki_fiche';
     // private static $user = '243609_root';
@@ -118,7 +118,7 @@ class PdoWiki
      *
      * @return l'id, le nom, le prénom, le mail, le mdp et la date de création sous la forme d'un tableau associatif
      */
-    public function getInfosCompteById()
+    public function getInfosCompteById($idCompte)
     {
         $requetePrepare = PdoWiki::$monPdo->prepare(
             'SELECT compte.id AS id, compte.nom AS nom, '
@@ -126,6 +126,7 @@ class PdoWiki
                 . 'compte.mdp AS mdp, '
                 . 'compte.role AS role, compte.xp AS xp '
                 . 'FROM compte '
+                . 'WHERE compte.id = :unId'
         );
         $requetePrepare->bindParam(':unId', $idCompte, PDO::PARAM_STR);
         $requetePrepare->execute();
@@ -133,7 +134,7 @@ class PdoWiki
     }
 
 
-        /**
+    /**
      * Retourne les informations d'une fiche
      *
      * @param String $id   id de la fiche
@@ -152,57 +153,72 @@ class PdoWiki
     }
 
     /**
-     * Retourne chaque fiche dans un tableau associative
+     * Retourne chaque topiics dans un tableau associative
      *
      *
      * @return null
      */
-    public function getFiches($etat)
+    public function getTopics()
     {
         $requetePrepare = PdoWiki::$monPdo->prepare(
-            'SELECT fiche.id AS id, fiche.idcategorie AS idcategorie, fiche.idcompte AS idcompte, '
-                . 'fiche.libelle AS libelle, '
-                . 'fiche.description AS description, '
-                . 'fiche.contenu AS contenu, '
-                . 'fiche.datemodif AS datemodif, '
-                . 'fiche.datecreation AS datecreation, '
-                . 'fiche.nblike AS nblike, '
-                . 'fiche.etat AS etat '
-                . 'FROM fiche '
-                . 'WHERE fiche.etat = :etat '
-                . 'ORDER BY fiche.datecreation'
+            'SELECT topics.id AS id, topics.id_categ AS idcategorie, topics.id_auteur AS idcompte, '
+                . 'topics.sujet AS sujet, '
+                . 'topics.question AS question, '
+                . 'topics.date_creation AS datecreation '
+                . 'FROM topics '
+                . 'ORDER BY datecreation'
         );
-        $requetePrepare->bindParam(':etat', $etat, PDO::PARAM_STR);
         $requetePrepare->execute();
         return $requetePrepare->fetchAll();
-        $fiches = array();
+        $topics = array();
         while ($laLigne = $requetePrepare->fetch()) {
             $id = $laLigne['id'];
+            $sujet = $laLigne['sujet'];
             $idcategorie = $laLigne['idcategorie'];
             $idcompte = $laLigne['idcompte'];
-            $libelle = $laLigne['libelle'];
             $description = $laLigne['description'];
-            $contenu = $laLigne['contenu'];
-            $datemodif = $laLigne['datemodif'];
+            $question = $laLigne['question'];
             $datecreation = $laLigne['datecreation'];
-            $nblike = $laLigne['nblike'];
-            $etat = $laLigne['etat'];
-            $fiches[] = array(
+            $topics[] = array(
                 'id'            => $id,
+                'sujet'         => $sujet,
                 'idcategorie'   => $idcategorie,
                 'idcompte'      => $idcompte,
-                'libelle'       => $libelle,
+                'question'       => $question,
                 'description'   => $description,
-                'contenu    '   => $contenu,
-                'datemodif'     => $datemodif,
                 'datecreation'  => $datecreation,
-                'nblike'        => $nblike,
-                'etat'          => $etat
             );
         }
-        return $fiches;
+        return $topics;
     }
-
+    public function getAllAccounts()
+    {
+        $requetePrepare = PdoWiki::$monPdo->prepare(
+            'SELECT * '
+                . 'FROM compte '
+                . 'ORDER BY id'
+        );
+        $requetePrepare->execute();
+        return $requetePrepare->fetchAll();
+        $comptes = array();
+        while ($laLigne = $requetePrepare->fetch()) {
+            $id = $laLigne['id'];
+            $prenom = $laLigne['prenom'];
+            $nom = $laLigne['nom'];
+            $mail = $laLigne['mail'];
+            $role = $laLigne['role'];
+            $xp = $laLigne['xp'];
+            $comptes[] = array(
+                'id'         => $id,
+                'prenom'     => $prenom,
+                'nom'        => $nom,
+                'mail'       => $mail,
+                'role'       => $role,
+                'xp'         => $xp,
+            );
+        }
+        return $comptes;
+    }
     /**
      * Retourne chaque fiche dans un tableau associative
      * $titre Titre de larticle
@@ -308,27 +324,27 @@ class PdoWiki
      *
      * @return null
      */
-    public function getComment($idFiche)
+    public function getComment($id)
     {
         $requetePrepare = PdoWiki::$monPdo->prepare(
-            'SELECT commentaire.id AS id, commentaire.idcompte AS idcompte, '
-            . 'commentaire.commentaire AS commentaire, commentaire.date AS date '
-            . 'from commentaire where commentaire.idfiche = :unIdFiche'
+            'SELECT reponses.id AS id, reponses.id_auteur AS idcompte, '
+                . 'reponses.commentaire AS commentaire, reponses.date_creation AS date '
+                . 'from reponses where reponses.id_topics = :unIdTopic'
         );
-        $requetePrepare->bindParam(':unIdFiche', $idFiche, PDO::PARAM_INT);
+        $requetePrepare->bindParam(':unIdTopic', $id, PDO::PARAM_INT);
         $requetePrepare->execute();
         return $requetePrepare->fetchAll();
         $commentaires = array();
         while ($laLigne = $requetePrepare->fetch()) {
             $id = $laLigne['id'];
             $idcompte = $laLigne['idcompte'];
-            $idFIche = $laLigne['idfiche'];
+            $idTopic = $laLigne['idfiche'];
             $commentaire = $laLigne['commentaire'];
             $date = $laLigne['date'];
             $commentaires[] = array(
                 'id'            => $id,
                 'idcompte'      => $idcompte,
-                'idfiche'       => $idFIche,
+                'id_topics'     => $idTopic,
                 'commentaire'   => $commentaire,
                 'date'          => $date
             );
@@ -336,7 +352,8 @@ class PdoWiki
         return $commentaires;
     }
 
-    function getNbComment($idFiche) {
+    function getNbComment($idFiche)
+    {
         $requetePrepare = PdoWiki::$monPdo->prepare(
             'SELECT count(*) AS nb from commentaire WHERE commentaire.idfiche = :idFiche'
         );
@@ -401,14 +418,14 @@ class PdoWiki
      *
      * @return null
      */
-    public function getTheFiche($idFiche)
+    public function getTopicById($idTopic)
     {
         $requetePrepare = PdoWiki::$monPdo->prepare(
-            'SELECT * FROM fiche '
-                . 'WHERE fiche.id = :idFiche '
-                . 'ORDER BY fiche.datecreation'
+            'SELECT * FROM topics '
+                . 'WHERE topics.id = :idTopic '
+                . 'ORDER BY topics.date_creation'
         );
-        $requetePrepare->bindParam(':idFiche', $idFiche, PDO::PARAM_INT);
+        $requetePrepare->bindParam(':idTopic', $idTopic, PDO::PARAM_STR);
         $requetePrepare->execute();
         return $requetePrepare->fetch();
     }
@@ -445,14 +462,14 @@ class PdoWiki
      *
      * @return null
      */
-    function insertComment($idCompte, $idFiche, $commentaire)
+    function insertComment($idTopic, $idAuteur, $commentaire)
     {
         $requetePrepare = PdoWiki::$monPdo->prepare(
-            'INSERT INTO `commentaire`(`id`, `idcompte`, `idfiche`, `commentaire`, `date`) '
-                . 'VALUES (DEFAULT, :unIdCompte, :idFiche, :commentaire, NOW())'
+            'INSERT INTO `reponses`(`id`, `id_topics`, `id_auteur`, `commentaire`, `date_creation`) '
+                . 'VALUES (DEFAULT, :idTopic, :idAuteur, :commentaire, NOW())'
         );
-        $requetePrepare->bindParam(':unIdCompte', $idCompte, PDO::PARAM_INT);
-        $requetePrepare->bindParam(':idFiche', $idFiche, PDO::PARAM_INT);
+        $requetePrepare->bindParam(':idTopic', $idTopic, PDO::PARAM_INT);
+        $requetePrepare->bindParam(':idAuteur', $idAuteur, PDO::PARAM_INT);
         $requetePrepare->bindParam(':commentaire', $commentaire, PDO::PARAM_STR);
         $requetePrepare->execute();
     }
@@ -626,7 +643,7 @@ class PdoWiki
         $requetePrepare->execute();
     }
 
-        /**
+    /**
      * Supprime un commentaire en base de donnée
      *
      * @param String $idFiche       id de la fiche
@@ -636,7 +653,7 @@ class PdoWiki
     function deleteComm($idcom)
     {
         $requetePrepare = PdoWiki::$monPdo->prepare(
-            'DELETE from commentaire where commentaire.id = :idcom'
+            'DELETE from reponses where reponses.id = :idcom'
         );
         $requetePrepare->bindParam(':idcom', $idcom, PDO::PARAM_STR);
         $requetePrepare->execute();

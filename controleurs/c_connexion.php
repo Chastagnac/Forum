@@ -9,7 +9,7 @@
  * @link      http://www.php.net/manual/fr/book.pdo.php PHP Data Objects sur php.net
  */
 
-$action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$action = $_GET['action'];
 if (!$uc) {
     $uc = 'demandeconnexion';
 }
@@ -19,8 +19,8 @@ switch ($action) {
         include 'vues/v_connexion.php';
         break;
     case 'valideConnexion':
-        $mail = filter_input(INPUT_POST, 'mail', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $mdp = filter_input(INPUT_POST, 'mdp', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $mail = $_POST['mail'];
+        $mdp = $_POST['mdp'];
         $compte = $pdo->getInfosCompte($mail, $mdp);
         if (is_array($compte)) {
             $id = $compte['id'];
@@ -43,11 +43,13 @@ switch ($action) {
         include 'vues/v_forgotPassword.php';
         break;
     case 'register':
-        $nom = filter_input(INPUT_POST, 'nom', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $prenom = filter_input(INPUT_POST, 'prenom', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $mail = filter_input(INPUT_POST, 'mail', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $mdp = filter_input(INPUT_POST, 'mdp', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        $mdp2 = filter_input(INPUT_POST, 'mdp2', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $nom = $_POST['nom'];
+        $prenom = $_POST['prenom'];
+        $mail = $_POST['mail'];
+        $mdp = $_POST['mdp'];
+        $mdp2 = $_POST['mdp2'];
+        $nom = "jfghufdioijhuiij";
+        console_log($nom);
         valideEnregistrement($nom, $prenom, $mail, $mdp, $mdp2);
         $infos = $pdo->getInfosCompte($mail, $mdp);
         if (nbErreurs() != 0) {

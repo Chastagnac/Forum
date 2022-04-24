@@ -56,6 +56,16 @@ section {
     letter-spacing: .2rem;
 }
 
+.wave {
+    width: 100%;
+    display: flex;
+    background: linear-gradient(60deg, rgb(58 35 181) 0%, rgb(9 2 36 / 95%) 100%);
+    color: white;
+    margin: auto;
+    border-radius: 17px;
+    height: 106px;
+}
+
 .header {
     background: rgb(47, 25, 74);
     background: linear-gradient(90deg, rgba(47, 25, 74, 1) 0%, rgba(55, 7, 17, 1) 100%);
@@ -64,7 +74,6 @@ section {
     justify-content: space-between;
     padding: 1.5rem 7%;
     border-bottom: var(--border);
-    position: fixed;
     top: 0;
     left: 0;
     right: 0;
