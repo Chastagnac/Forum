@@ -4,9 +4,8 @@
  * Vue Accueil
  *
  * PHP Version 7
- * @category  PPE
- * @package   Wiki Fiche
- * @link      http://www.php.net/manual/fr/book.pdo.php PHP Data Objects sur php.net
+ * @category  PROJET V6.0.0
+ * @package   Le forum des geeks
  */
 
 ?>
@@ -14,7 +13,7 @@
     <link href="../styles/stylesPages/accueil.css" rel="stylesheet">
 </header>
 
-
+<a name="top">
 <div style="margin-top: 100px;">
     <section class="contact" id="contact">
 
@@ -25,18 +24,15 @@
                         <h3>Films <span>Récents</span></h3>
                         <li>
                             <h4>Toy Story 3</h4><img src="../images/affiches/1page-img2.jpg" alt="" />
-                            <p>Check out Disney-Pixar's official Toy Story site, watch the <span>Toy Story 3</span> trailer, and meet new characters. Remember, no toy gets left behind!</p>
-                            <div class="wrapper"><a href="#" class="link2"><span><span>Read More</span></span></a></div>
+                            <p>Quand le jeune Andy quitte sa chambre, ses jouets se mettent à mener leur propre vie sous la houlette de son pantin préféré... </p>
                         </li>
                         <li>
-                            <h4>Prince of Percia: Sands </h4><img src="../images/affiches/1page-img3.jpg" alt="" />
-                            <p>A young fugitive prince and princess must stop a villain who unknowingly threatens to destroy the world with a special dagger.</p>
-                            <div class="wrapper"><a href="#" class="link2"><span><span>Read More</span></span></a></div>
+                            <h4>Prince of Persia : Les Sables du Temps </h4><img src="../images/affiches/1page-img3.jpg" alt="" />
+                            <p>Un prince rebelle est contraint d'unir ses forces avec une mystérieuse princesse pour affronter ensemble les forces du mal et protéger une dague antique...</p>
                         </li>
                         <li class="last">
-                            <h4>The Twilight Saga: Eclipse</h4><img src="../images/affiches/1page-img4.jpg" alt="" />
-                            <p>As a string of mysterious killings grips Bella is forced to choose between her love for vampire Edward and her friendship with werewolf Jacob.</p>
-                            <div class="wrapper"><a href="#" class="link2"><span><span>Read More</span></span></a></div>
+                            <h4>Twilight, chapitre III : Hésitation</h4><img src="../images/affiches/1page-img4.jpg" alt="" />
+                            <p>Des morts suspectes dans les environs de Seattle laissent présager une nouvelle menace pour Bella. Victoria cherche toujours à assouvir sa vengeance contre elle et rassemble une armée...</p>
                         </li>
                         <li class="clear">&nbsp;</li>
                     </ul>
@@ -56,8 +52,13 @@
                         $datecreation = $top['datecreation'];
                         if ($i < 3) {
                             $i++; ?>
-                            <li><img src="../images/affiches/3page-img1.jpg" alt="" /><a href="article.html"><?php echo htmlspecialchars($datecreation); ?></a><br />
-                                <?php echo htmlspecialchars($sujet) ?><br />
+                            <li><img src="../images/affiches/3page-img1.jpg" alt="" />
+                                <a href="index.php?uc=discussion&action=discussion&id=<?php echo htmlspecialchars($id); ?>">
+                                    <?php echo htmlspecialchars($datecreation); ?>
+                                </a>
+                                <br />
+                                <?php echo htmlspecialchars($sujet) ?>
+                                <br />
                             </li>
                     <?php
                         }
@@ -68,44 +69,7 @@
 
         </div>
     </section>
-    <section class="blogs" id="blogs">
-        <h3 class="text-center">Hot <span>Topics</span></h3>
-        <div class="box-container">
-            <div class="box">
-                <div class="image">
-                    <img src="images/blog-1.jpeg" alt="">
-                </div>
-                <div class="content">
-                    <a href="#" class="title">tasty and refreshing coffee</a>
-                    <span>by admin / 21st may, 2021</span>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, dicta.</p>
-                    <a href="#" class="btn">read more</a>
-                </div>
-            </div>
-
-            <div class="box">
-                <div class="image">
-                    <img src="images/blog-2.jpeg" alt="">
-                </div>
-                <div class="content">
-                    <a href="#" class="title">tasty and refreshing coffee</a>
-                    <span>by admin / 21st may, 2021</span>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, dicta.</p>
-                    <a href="#" class="btn">read more</a>
-                </div>
-            </div>
-
-            <div class="box">
-                <div class="image">
-                    <img src="images/blog-3.jpeg" alt="">
-                </div>
-                <div class="content">
-                    <a href="#" class="title">tasty and refreshing coffee</a>
-                    <span>by admin / 21st may, 2021</span>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, dicta.</p>
-                    <a href="#" class="btn">read more</a>
-                </div>
-            </div>
-        </div>
-    </section>
+    
+     <!--Ancrage-->
+    <a href="#top"><i class="fa fa-anchor fa-3x white"></i></a>
 </div>

@@ -1,23 +1,13 @@
 <?php
 
 /**
- * Vue Accueil
+ * Vue Mes informations
  *
  * PHP Version 7
- * @category  G4
- * @package   Wiki Fiche
- * @link      http://www.php.net/manual/fr/book.pdo.php PHP Data Objects sur php.net
+ * @category  PROJET V6.0.0
+ * @package   Le forum des geeks
  */
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title>Forum des geeks : Mon compte</title>
-    <!-- <link rel="stylesheet" href="../styles/stylesPages/compte.css"> -->
-</head>
-
-
 
 <section class="main">
     <table>
@@ -40,7 +30,8 @@
     <button class="btn-danger" type="submit">Se déconnecter</button>
 </form>
 
-<section>
+
+<section class="responsivetab">
     <table>
         <tr>
             <td>Id</td>
@@ -49,7 +40,7 @@
             <td>Mail/td>
             <td>Rôle</td>
             <td>Xp</td>
-            <td></td>
+            <td> Supprimer un utilisateur </td>
         </tr>
         <?php
         foreach ($comptes as $compte => $co) {
@@ -67,17 +58,11 @@
                 <td><?php echo $mail ?></td>
                 <td><?php echo (getLibelleRole($role)) ?></td>
                 <td><?php echo $xp ?></td>
-                <td><?php ?></td>
+                <td><a class="croix" href="index.php?uc=gererCompte&action=suppression&id=<?php echo $id; ?>">x</a></td>
             </tr>
+            
         <?php
         }
         ?>
     </table>
 </section>
-
-
-
-</div>
-</div>
-
-</html>

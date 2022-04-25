@@ -1,5 +1,4 @@
 <?php
-
 /**
  *  Index
  *
@@ -8,7 +7,6 @@
  * @package   Forum
  * @link      http://www.php.net/manual/fr/book.pdo.php PHP Data Objects sur php.net
  */
-
 
 require_once 'includes/fct.inc.php';
 require_once 'includes/class.pdowiki.inc.php';
@@ -37,11 +35,8 @@ switch ($uc) {
     case 'accueil':
         include 'controleurs/c_accueil.php';
         break;
-    case 'validation':
-        include 'controleurs/c_validation.php';
-        break;
-    case 'gererFiche':
-        include 'controleurs/c_gererFiche.php';
+    case 'gererTopic':
+        include 'controleurs/c_gererTopic.php';
         break;
     case 'gererCompte':
         include 'controleurs/c_gererCompte.php';
@@ -49,11 +44,7 @@ switch ($uc) {
     case 'discussion':
         include 'controleurs/c_gererDiscussion.php';
         break;
-    case 'controlerFiche':
-        include 'controleurs/c_controlerFiche.php';
-        break;
     case 'deconnexion':
         include 'controleurs/c_deconnexion.php';
         break;
 }
-require 'vues/v_pied.php';

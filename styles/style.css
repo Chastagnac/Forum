@@ -7,7 +7,6 @@ p {
     font-size: 15px;
 }
 html{
-    font-size: 14px;
     font-family: 'Titillium Web', sans-serif;
     background-color:rgb(0,0,0);
     color:#FEFEFE;
@@ -54,6 +53,7 @@ h1{
 .modern-btn-valide {
     width: 90px;
     height: 35px;
+    margin-top: 10px;
     background-color: #7FD7A7;
     border-radius: 5px;
     color: white;
@@ -93,6 +93,14 @@ h1{
     background-color: #da5959 !important;
 }
 
+.btn-create {
+    border-radius: 18px;
+    margin: 50px;
+    background-color: rgb(47, 25, 74);
+    color: white;
+    padding: 15px;
+    cursor: pointer;
+}
 .container {
     display: flex;
     margin: auto;
@@ -102,6 +110,14 @@ h1{
     margin-left: 50px;
 }
 
+.mb-full {
+    margin-bottom: 100%;
+}
+
+.space {
+    height: 200px;
+    width: 100%;
+}
 .form-group {
     display: flex;
     margin: auto;
@@ -180,8 +196,15 @@ h1{
     float: right;
 }
 
-
-
+.textarea {
+    border-style: solid;
+}
+.input2 {
+    padding: 5px;
+    width: 100%;
+    margin-bottom: 81px;
+    border-style: solid;
+}
 /* home */
 
 
@@ -234,7 +257,7 @@ h1{
 }
 
 .subforum-devider{
-	dsiplay: none;
+	display: none;
 }
 
 /* barre de recherche */
@@ -322,6 +345,9 @@ h1{
 
 /* Pour les téléphone portable*/
 @media screen and (max-width: 460px){
+    .responsivetab {
+        display: none;
+    }
 		.container{
 			margin: 10px;
 			padding: 10px;
@@ -330,7 +356,7 @@ h1{
 		.subforum-row{
 			display: grid; 
 			grid-template-columns: 25% 75%;
-			grid-template-row: 65% 35%;
+			grid-template-rows: 65% 35%;
 		}
 		
 		.subforum-stats{
@@ -419,3 +445,133 @@ table {
     border-radius: 10px;
     padding: 15px;
 }
+
+.croix {
+    float: right;
+}
+
+   /* Authentification */
+
+   @import url("https://fonts.googleapis.com/css?family=Quicksand&display=swap");
+
+   * {
+       box-sizing: border-box;
+   }
+
+   .container {
+       position: relative;
+       width: 420px;
+       height: auto;
+       padding: 15px 25px;
+       border-radius: 10px;
+       font-size: 18px;
+       font-family: "Quicksand", sans-serif;
+   }
+
+   .logouser {
+       position: absolute;
+       top: 2%;
+       left: 50%;
+       transform: translate(-50%, 0);
+       width: 55px;
+       height: 55px;
+       border-radius: 50%;
+       box-shadow: 0 5px 5px #ccc;
+       font-size: 1.8em;
+       background-color: #785693ed;
+       color: rgb(47, 25, 74);;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+   }
+
+   .tab-body {
+       position: relative;
+       display: none;
+       margin: auto;
+       max-height: 100%;
+       height: auto;
+       padding: 15% 5%;
+       margin-top: 20%;
+       background-color: #fff;
+       color: #000000de;
+       box-shadow: 0px 5px 10px #7c8395;
+       border-radius: 30px;
+       font-size: 1rem;
+   }
+
+   .tab-body.active {
+       display: block;
+   }
+
+   .row {
+       display: flex;
+       justify-content: space-between;
+       border-bottom: 1px solid #7c8395;
+       padding: 1.8% 0;
+       margin: 20px 0;
+   }
+
+
+
+
+
+   .link {
+       display: inline-block;
+       font-size: 0.8em;
+       width: 100%;
+       text-decoration: none;
+       color: #2b384f;
+       text-align: right;
+   }
+
+   .link:hover {
+       text-decoration: underline;
+   }
+
+   .btn {
+       position: absolute;
+       left: 50%;
+       bottom: 0;
+       transform: translate(-50%, 50%);
+       height: 45px;
+       border-radius: 50px;
+       background-color: rgb(47, 25, 74);;
+       border: none;
+       outline: none;
+       color: #fff;
+       cursor: pointer;
+   }
+
+   .tab-footer {
+       position: absolute;
+       bottom: 5%;
+       left: 50%;
+       transform: translate(-50%, 0);
+       height: 30px;
+       display: flex;
+   }
+
+   .tab-link {
+       text-decoration: none;
+       margin: 0 3%;
+   }
+
+   .tab-link.active {
+       font-weight: bold;
+   }
+
+   @media screen and (max-width: 520px) {
+       .container {
+           width: 80%;
+           min-width: 380px;
+           min-height: 490px;
+       }
+
+       .tab-body {
+           width: 100%;
+           padding: 15% 5%;
+           margin-top: 25%;
+           max-height: 420px;
+       }
+   }

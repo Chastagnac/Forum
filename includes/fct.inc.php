@@ -49,67 +49,6 @@ function deconnecter()
     session_destroy();
 }
 
-/**
- * Transforme une date au format français jj/mm/aaaa vers le format anglais
- * aaaa-mm-jj
- *
- * @param String $maDate au format  jj/mm/aaaa
- *
- * @return Date au format anglais aaaa-mm-jj
- */
-function dateFrancaisVersAnglais($maDate)
-{
-    @list($jour, $mois, $annee) = explode('/', $maDate);
-    return date('Y-m-d', mktime(0, 0, 0, $mois, $jour, $annee));
-}
-
-/**
- * Transforme une date au format format anglais aaaa-mm-jj vers le format
- * français jj/mm/aaaa
- *
- * @param String $maDate au format  aaaa-mm-jj
- *
- * @return Date au format format français jj/mm/aaaa
- */
-function dateAnglaisVersFrancais($maDate)
-{
-    @list($annee, $mois, $jour) = explode('-', $maDate);
-    $date = $jour . '/' . $mois . '/' . $annee;
-    return $date;
-}
-
-/**
- * Retourne le mois au format aaaamm selon le jour dans le mois
- *
- * @param String $date au format  jj/mm/aaaa
- *
- * @return String Mois au format aaaamm
- */
-function getMois($date)
-{
-    @list($jour, $mois, $annee) = explode('/', $date);
-    unset($jour);
-    if (strlen($mois) == 1) {
-        $mois = '0' . $mois;
-    }
-    return $annee . $mois;
-}
-
-
-
-function getCategorie($idCateg) {
-    
-}
-/**
- * Retourne la date actuelle
- * 
- *  @return String Date au format AAAA-JJ-MM
- */
-function getDateToday()
-{
-    $today = getDate();
-    return ($today['year'] . "-" . $today['mday'] . "-" . $today["mon"]);
-}
 
 function getRank($xp)
 {
@@ -310,9 +249,9 @@ function nbErreurs()
  * @param String $contenu       Contenu de la fiche
  *
  */
-function checkFiche($libelle, $description, $contenu)
+function checkFiche($sujet, $question)
 {
-    if ($libelle == "" || $description == "" || $contenu == "") {
+    if ($sujet == "" || $question == "") {
         ajouterErreur('Les champs ne peuvent pas être vide');
     }
 }

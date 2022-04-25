@@ -1,43 +1,97 @@
 <?php
 
 /**
- * Vue Connexion inscription
- * 
+ * Vue Conexion
+ *
  * PHP Version 7
- * @category  Forum
+ * @category  PROJET V6.0.0
+ * @package   Le forum des geeks
  */
 
 ?>
 
+<body>
+    <div class="container">
+        <div class="logouser">
+            <i class="fas fa-user"></i>
+        </div>
 
-<head>
-    <link href="../styles/stylesPages/authentification.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="slide navbar style.css">
-</head>
+        <div class="tab-body" data-id="connexion">
+            <form role="form" method="POST" action="index.php?uc=connexion&action=valideConnexion">
+                <div class="row">
+                    <i class="far fa-user"></i>
+                    <input type="email" name="mail" class="input" placeholder="Adresse Mail">
+                </div>
+                <div class="row">
+                    <i class="fas fa-lock"></i>
+                    <input placeholder="Mot de Passe" name="mdp" type="password" class="input">
+                </div>
+                <br>
+                <button class="btn" type="submit">Connexion</button>
+            </form>
+        </div>
 
-<div class="main">
-    <input type="checkbox" id="chk" aria-hidden="true">
+        <div class="tab-body" data-id="inscription">
+            <form role="form" method="POST" action="index.php?uc=connexion&action=register">
+                <div class="row">
+                    <i class="far fa-user"></i>
+                    <input type="email" name="mail" class="" placeholder="Adresse Mail">
+                </div>
+                <div class="row">
+                    <i class="fas fa-lock"></i>
+                    <input type="text" name="nom" class="" placeholder="Votre nom" autocomplete="off">
 
-    <div class="signup">
-        <form role="form" method="POST" action="index.php?uc=connexion&action=register">
-            <label for="chk" aria-hidden="true">S'inscrire</label>
-            <input type="text" name="mail" class="" placeholder="Email" maxlength="45">
-            <input type="text" name="nom" class="" placeholder="Votre nom" autocomplete="off">
-            <input type="text" name="prenom" class="" placeholder="Votre prénom" autocomplete="off">
-            <input type="password" name="mdp" class="" placeholder="Votre mot de passe" autocomplete="off">
-            <input type="password" name="mdp2" class="" placeholder="Confirmez" autocomplete="off">
-            <button type="submit">Inscription</button>
+                </div>
+                <div class="row">
+                    <i class="fas fa-lock"></i>
+                    <input type="text" name="prenom" class="" placeholder="Votre prénom" autocomplete="off">
+                </div>
+                <div class="row">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" name="mdp" class="" placeholder="Mot de passe" autocomplete="off">
+                </div>
+                <div class="row">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" name="mdp2" class="" placeholder="Confirmez" autocomplete="off">
+                </div>
+                <br>
+                <button class="btn" type="submit">Inscription</button>
+            </form>
+        </div>
 
-        </form>
+        <div class="tab-footer">
+            <a class="tab-link active" data-ref="connexion" href="javascript:void(0)">Connexion</a>
+            <a class="tab-link" data-ref="inscription" href="javascript:void(0)">Inscription</a>
+        </div>
     </div>
+</body>
 
-    <div class="login">
+</html>
 
-        <form role="form" method="POST" action="index.php?uc=connexion&action=valideConnexion">
-            <label for="chk" aria-hidden="true">Se connecter</label>
-            <input type="text" name="mail" class="" placeholder="Votre email" autocomplete="off">
-            <input type="password" name="mdp" class="" placeholder="Votre mot de passe" autocomplete="off">
-            <button type="submit">Connection</button>
-        </form>
-    </div>
-</div>
+
+<script>
+    let tabs = document.querySelectorAll(".tab-link:not(.desactive)");
+
+    tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+            unSelectAll();
+            tab.classList.add("active");
+            let ref = tab.getAttribute("data-ref");
+            document
+                .querySelector(`.tab-body[data-id="${ref}"]`)
+                .classList.add("active");
+        });
+    });
+
+    function unSelectAll() {
+        tabs.forEach((tab) => {
+            tab.classList.remove("active");
+        });
+        let tabbodies = document.querySelectorAll(".tab-body");
+        tabbodies.forEach((tab) => {
+            tab.classList.remove("active");
+        });
+    }
+
+    document.querySelector(".tab-link.active").click();
+</script>

@@ -1,10 +1,11 @@
 <?php
+
 /**
  * Vue Erreurs
  *
  * PHP Version 7
- *
- * @category  Forum
+ * @category  PROJET V6.0.0
+ * @package   Le forum des geeks
  */
 
 ?>

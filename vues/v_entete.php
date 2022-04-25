@@ -1,19 +1,19 @@
 <?php
 
 /**
- * Vue Entête
- * PHP Version 7
+ * Vue Entete
  *
- * @category  Forum
+ * PHP Version 7
+ * @category  PROJET V6.0.0
+ * @package   Le forum des geeks
  */
 ?>
 <html>
 
 <head>
+    <title>Forum des geeks</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="UTF-8">
-    <title>Forum des geeks</title>
-    
     <meta name="description" content="">
     <meta name="author" content="Léo Chastagnac, Romain Santiago">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
