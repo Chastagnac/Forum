@@ -5,7 +5,7 @@
  *
  * PHP Version 7
  * @category  Projet
- * @package   Wiki Fiche
+ * @package   Forum
  * @link      http://www.php.net/manual/fr/book.pdo.php PHP Data Objects sur php.net
  */
 
@@ -48,7 +48,6 @@ switch ($action) {
         $mail = $_POST['mail'];
         $mdp = $_POST['mdp'];
         $mdp2 = $_POST['mdp2'];
-        $nom = "jfghufdioijhuiij";
         console_log($nom);
         valideEnregistrement($nom, $prenom, $mail, $mdp, $mdp2);
         $infos = $pdo->getInfosCompte($mail, $mdp);

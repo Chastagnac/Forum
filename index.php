@@ -9,11 +9,11 @@
  */
 
 require_once 'includes/fct.inc.php';
-require_once 'includes/class.pdowiki.inc.php';
+require_once 'includes/class.pdoforum.inc.php';
 session_start();
 
 
-$pdo = PdoWiki::getPdoWiki();
+$pdo = PdoForum::getPdoForum();
 $estConnecte = estConnecte();
 require 'vues/v_entete.php';
 
@@ -48,3 +48,4 @@ switch ($uc) {
         include 'controleurs/c_deconnexion.php';
         break;
 }
+require 'vues/v_pied.php';

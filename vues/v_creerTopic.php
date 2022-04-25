@@ -10,9 +10,6 @@
 
 ?>
 
-<head>
-
-</head>
 
 <form role="form" method="post" action="index.php?uc=gererTopic&action=insert">
     <fieldset class="container">

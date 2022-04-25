@@ -6,8 +6,8 @@
  * PHP Version 7
  *
  * @category  G4
- * @package   WIKI_FICHE
- * @author    leochastagnac@gmail.com
+ * @package   Forum
+ * @author    leochastagnac@gmail.com romainsantiago@gmail.com
  * @link      http://www.php.net/manual/fr/book.pdo.php PHP Data Objects sur php.net
  */
 
@@ -15,7 +15,7 @@
  * Classe d'accès aux données.
  *
  * Utilise les services de la classe PDO
- * pour l'application wiki_fiche
+ * pour l'application forum
  * Les attributs sont tous statiques,
  * les 4 premiers pour la connexion
  * $monPdo de type PDO
@@ -24,10 +24,10 @@
  * PHP Version 7
  *
  * @category  Projet
- * @package   Wiki Fiche
+ * @package   Forum 
  * @link      http://www.php.net/manual/fr/book.pdo.php PHP Data Objects sur php.net
  */
-class PdoWiki
+class PdoForum
 {
 
     // private static $serveur = 'mysql:host=localhost';
@@ -39,23 +39,24 @@ class PdoWiki
 
 
     private static $serveur = 'mysql:host=mysql-foum.alwaysdata.net';
-    private static $bdd = 'dbname=forum';
+    private static $bdd = 'dbname=foum_forum';
     private static $user = 'foum';
-    private static $mdp = '@root123';
+    private static $mdp = 'azertyuioproot123';
     private static $monPdo;
     private static $monPdoForum = null;
+
     /**
      * Constructeur privé, crée l'instance de PDO qui sera sollicitée
      * pour toutes les méthodes de la classe
      */
     private function __construct()
     {
-        PdoWiki::$monPdo = new PDO(
-            PdoWiki::$serveur . ';' . PdoWiki::$bdd,
-            PdoWiki::$user,
-            PdoWiki::$mdp
+        PdoForum::$monPdo = new PDO(
+            PdoForum::$serveur . ';' . PdoForum::$bdd,
+            PdoForum::$user,
+            PdoForum::$mdp
         );
-        PdoWiki::$monPdo->query('SET CHARACTER SET utf8');
+        PdoForum::$monPdo->query('SET CHARACTER SET utf8');
     }
 
     /**
@@ -64,21 +65,21 @@ class PdoWiki
      */
     public function __destruct()
     {
-        PdoWiki::$monPdo = null;
+        PdoForum::$monPdo = null;
     }
 
     /**
      * Fonction statique qui crée l'unique instance de la classe
-     * Appel : $instancePdoWiki = PdoWiki::getPdoWiki();
+     * Appel : $instancePdoForum = PdoForum::getPdoForum();
      *
-     * @return l'unique objet de la classe PdoWiki
+     * @return l'unique objet de la classe PdoForum
      */
-    public static function getPdoWiki()
+    public static function getPdoForum()
     {
-        if (PdoWiki::$monPdoForum == null) {
-            PdoWiki::$monPdoForum = new PdoWiki();
+        if (PdoForum::$monPdoForum == null) {
+            PdoForum::$monPdoForum = new PdoForum();
         }
-        return PdoWiki::$monPdoForum;
+        return PdoForum::$monPdoForum;
     }
 
     /**
@@ -90,7 +91,7 @@ class PdoWiki
      */
     public function getInfosCompte($email, $mdp)
     {
-        $requetePrepare = PdoWiki::$monPdo->prepare(
+        $requetePrepare = PdoForum::$monPdo->prepare(
             'SELECT compte.id AS id, compte.nom AS nom, '
                 . 'compte.prenom AS prenom, compte.mail AS mail, '
                 . 'compte.role AS role, compte.xp AS xp '
@@ -105,7 +106,7 @@ class PdoWiki
 
     function updateXp($idCompte, $nb)
     {
-        $requetePrepare = PdoWiki::$monPdo->prepare(
+        $requetePrepare = PdoForum::$monPdo->prepare(
             'UPDATE `compte` SET `xp`= compte.xp + :nb WHERE compte.id = :idCompte'
         );
         $requetePrepare->bindParam(':idCompte', $idCompte, PDO::PARAM_INT);
@@ -122,7 +123,7 @@ class PdoWiki
      */
     public function getInfosCompteById($idCompte)
     {
-        $requetePrepare = PdoWiki::$monPdo->prepare(
+        $requetePrepare = PdoForum::$monPdo->prepare(
             'SELECT compte.id AS id, compte.nom AS nom, '
                 . 'compte.prenom AS prenom, compte.mail AS mail, '
                 . 'compte.mdp AS mdp, '
@@ -146,7 +147,7 @@ class PdoWiki
      */
     public function getTopics()
     {
-        $requetePrepare = PdoWiki::$monPdo->prepare(
+        $requetePrepare = PdoForum::$monPdo->prepare(
             'SELECT topics.id AS id, topics.id_categ AS idcategorie, topics.id_auteur AS idcompte, '
                 . 'topics.sujet AS sujet, '
                 . 'topics.question AS question, '
@@ -186,7 +187,7 @@ class PdoWiki
      */
     public function getAllAccounts()
     {
-        $requetePrepare = PdoWiki::$monPdo->prepare(
+        $requetePrepare = PdoForum::$monPdo->prepare(
             'SELECT * '
                 . 'FROM compte '
                 . 'ORDER BY id'
@@ -217,14 +218,14 @@ class PdoWiki
    
 
     /**
-     * Retourne chaque fiche dans un tableau associative
+     * Retourne chaque topic dans un tableau associative
      *
      *
      * @return null
      */
     public function getComment($id)
     {
-        $requetePrepare = PdoWiki::$monPdo->prepare(
+        $requetePrepare = PdoForum::$monPdo->prepare(
             'SELECT reponses.id AS id, reponses.id_auteur AS idcompte, '
                 . 'reponses.commentaire AS commentaire, reponses.date_creation AS date '
                 . 'from reponses where reponses.id_topics = :unIdTopic'
@@ -255,13 +256,13 @@ class PdoWiki
     
 
     /**
-     * Retourne 1 fiche dans un tableau associative
+     * Retourne 1 topic dans un tableau associative
      *
      * @return null
      */
     public function getTopicById($idTopic)
     {
-        $requetePrepare = PdoWiki::$monPdo->prepare(
+        $requetePrepare = PdoForum::$monPdo->prepare(
             'SELECT * FROM topics '
                 . 'WHERE topics.id = :idTopic '
                 . 'ORDER BY topics.date_creation'
@@ -272,14 +273,14 @@ class PdoWiki
     }
 
     /**
-     * Permets de créer une fiche par un utilisateur
+     * Permets de créer une topic par un utilisateur
      *
      * @return null
      */
     function insertTopic($idCategorie, $idCompte, $sujet, $question)
     {
         $idCompte = $_SESSION['idCompte'];
-        $requetePrepare = PdoWiki::$monPdo->prepare(
+        $requetePrepare = PdoForum::$monPdo->prepare(
             'INSERT INTO `topics`(`id`, `id_categ`, `id_auteur`, `sujet`, `question`, `date_creation`) '
                 . 'VALUES (DEFAULT, :idcategorie, :idCompte, :sujet, :question, "2022-04-24")'
         );
@@ -303,7 +304,7 @@ class PdoWiki
      */
     function insertComment($idTopic, $idAuteur, $commentaire)
     {
-        $requetePrepare = PdoWiki::$monPdo->prepare(
+        $requetePrepare = PdoForum::$monPdo->prepare(
             'INSERT INTO `reponses`(`id`, `id_topics`, `id_auteur`, `commentaire`, `date_creation`) '
                 . 'VALUES (DEFAULT, :idTopic, :idAuteur, :commentaire, NOW())'
         );
@@ -327,7 +328,7 @@ class PdoWiki
      */
     function register($prenom, $nom, $mdp, $mail)
     {
-        $requetePrepare = PdoWiki::$monPdo->prepare(
+        $requetePrepare = PdoForum::$monPdo->prepare(
             'INSERT INTO `compte`(`id`, `prenom`, `nom`, `mdp`, `mail`,`role`,`xp`) '
                 . 'VALUES (DEFAULT, :unPrenom, :unNom, :unMdp, :unMail, DEFAULT, DEFAULT)'
         );
@@ -342,15 +343,15 @@ class PdoWiki
 
 
     /**
-     * Supprime une fiche en base de donnée
+     * Supprime une topic en base de donnée
      *
-     * @param String $idFiche       id de la fiche
+     * @param String $idtopic       id de la topic
      *
      * @return null
      */
     function deleteTopic($idTopic)
     {
-        $requetePrepare = PdoWiki::$monPdo->prepare(
+        $requetePrepare = PdoForum::$monPdo->prepare(
             'DELETE from topics where topics.id = :idTopic'
         );
         $requetePrepare->bindParam(':idTopic', $idTopic, PDO::PARAM_STR);
@@ -360,13 +361,13 @@ class PdoWiki
     /**
      * Supprime un commentaire en base de donnée
      *
-     * @param String $idFiche       id de la fiche
+     * @param String $idtopic       id de la topic
      *
      * @return null
      */
     function deleteComm($idcom)
     {
-        $requetePrepare = PdoWiki::$monPdo->prepare(
+        $requetePrepare = PdoForum::$monPdo->prepare(
             'DELETE from reponses where reponses.id = :idcom'
         );
         $requetePrepare->bindParam(':idcom', $idcom, PDO::PARAM_STR);
@@ -376,13 +377,13 @@ class PdoWiki
  /**
      * Supprime un compte en base de donnée
      *
-     * @param String $idFiche       id de la fiche
+     * @param String $idtopic       id de la topic
      *
      * @return null
      */
     function deleteCompte($idCompte)
     {
-        $requetePrepare = PdoWiki::$monPdo->prepare(
+        $requetePrepare = PdoForum::$monPdo->prepare(
             'DELETE from compte where compte.id = :idCompte'
         );
         $requetePrepare->bindParam(':idCompte', $idCompte, PDO::PARAM_STR);
@@ -396,12 +397,12 @@ class PdoWiki
      */
     public static function hashPasswordsCompte()
     {
-        if (PdoWiki::$monPdoForum == null) {
-            PdoWiki::$monPdoForum = new PdoWiki();
+        if (PdoForum::$monPdoForum == null) {
+            PdoForum::$monPdoForum = new PdoForum();
         }
 
         $sql = "SELECT * FROM `compte`";
-        $requetePrepare = PdoWiki::$monPdo->prepare($sql);
+        $requetePrepare = PdoForum::$monPdo->prepare($sql);
         $requetePrepare->execute();
         $tableauResult = $requetePrepare->fetchALL(PDO::FETCH_ASSOC);
         foreach ($tableauResult as $ligne) {
@@ -409,7 +410,7 @@ class PdoWiki
                 $pwdHashed = hash("sha256", $ligne["mdp"]);
                 $sql = "update compte set mdp = '" . $pwdHashed
                     . "' where id = '" . $ligne["id"] . "'";
-                $requetePrepare = PdoWiki::$monPdo->prepare($sql);
+                $requetePrepare = PdoForum::$monPdo->prepare($sql);
                 $requetePrepare->execute();
                 echo "Compte hashé <br>";
             }

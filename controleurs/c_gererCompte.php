@@ -6,7 +6,7 @@
  * PHP Version 7
  * 
  * @category  PPE
- * @package   Wiki Fiche
+ * @package   Forum
  * @link      http://www.php.net/manual/fr/book.pdo.php PHP Data Objects sur php.net
  */
 

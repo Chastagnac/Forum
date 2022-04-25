@@ -10,7 +10,6 @@
 
 ?>
 
-<body>
     <div class="container">
         <div class="logouser">
             <i class="fas fa-user"></i>
@@ -64,9 +63,7 @@
             <a class="tab-link" data-ref="inscription" href="javascript:void(0)">Inscription</a>
         </div>
     </div>
-</body>
 
-</html>
 
 
 <script>

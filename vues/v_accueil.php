@@ -13,21 +13,22 @@
     <link href="../styles/stylesPages/accueil.css" rel="stylesheet">
 </header>
 
-<a name="top">
+
 <div style="margin-top: 100px;">
+    <div name="top"></div>
     <section class="contact" id="contact">
 
         <div class="row">
             <div class="map">
                 <div class="content">
                     <ul class="movies">
-                        <h3>Films <span>Récents</span></h3>
+                        Films <span>Récents</span>
                         <li>
-                            <h4>Toy Story 3</h4><img src="../images/affiches/1page-img2.jpg" alt="" />
+                            <h4>Toy Story 3</h4><img src="../images/affiches/1page-img2.jpg" alt="imageToStory" />
                             <p>Quand le jeune Andy quitte sa chambre, ses jouets se mettent à mener leur propre vie sous la houlette de son pantin préféré... </p>
                         </li>
                         <li>
-                            <h4>Prince of Persia : Les Sables du Temps </h4><img src="../images/affiches/1page-img3.jpg" alt="" />
+                            <h4>Prince of Persia : Les Sables du Temps </h4><img src="../images/affiches/1page-img3.jpg" alt="imagePrinceOfPersia" />
                             <p>Un prince rebelle est contraint d'unir ses forces avec une mystérieuse princesse pour affronter ensemble les forces du mal et protéger une dague antique...</p>
                         </li>
                         <li class="last">
@@ -52,7 +53,7 @@
                         $datecreation = $top['datecreation'];
                         if ($i < 3) {
                             $i++; ?>
-                            <li><img src="../images/affiches/3page-img1.jpg" alt="" />
+                            <li><img href="../images/affiches/3page-img1.jpg" alt="" />
                                 <a href="index.php?uc=discussion&action=discussion&id=<?php echo htmlspecialchars($id); ?>">
                                     <?php echo htmlspecialchars($datecreation); ?>
                                 </a>
@@ -69,7 +70,7 @@
 
         </div>
     </section>
-    
-     <!--Ancrage-->
+
+    <!--Ancrage-->
     <a href="#top"><i class="fa fa-anchor fa-3x white"></i></a>
 </div>

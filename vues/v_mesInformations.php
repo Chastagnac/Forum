@@ -37,7 +37,7 @@
             <td>Id</td>
             <td>Nom</td>
             <td>Prénom</td>
-            <td>Mail/td>
+            <td>Mail</td>
             <td>Rôle</td>
             <td>Xp</td>
             <td> Supprimer un utilisateur </td>

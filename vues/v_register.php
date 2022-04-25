@@ -12,9 +12,7 @@
 deconnecter();
 ?>
 
-<head>
 
-</head>
 <div class="mb-full">
     <p>Vous allez être redirigé vers la page d'enregistrement <br>
 </div>

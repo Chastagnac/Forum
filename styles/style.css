@@ -184,7 +184,7 @@ h1{
     margin: auto;
 }
 .area {
-    background-color: #3b0e3e69;
+    background-color: #87878769;
     border-radius: 15px 15px 0 39px;
     color: #FEFEFE;
 }
@@ -565,7 +565,10 @@ table {
        .container {
            width: 80%;
            min-width: 380px;
-           min-height: 490px;
+           /* min-height: 490px; */
+       }
+       .center {
+           display: block;
        }
 
        .tab-body {

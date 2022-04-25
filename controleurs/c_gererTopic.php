@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Gestion des fiches
+ * Gestion des Topics
  *
  * PHP Version 7
  * 
  * @category  PPE
- * @package   Wiki Fiche
+ * @package   Forum
  * @link      http://www.php.net/manual/fr/book.pdo.php PHP Data Objects sur php.net
  */
 
@@ -43,22 +43,5 @@ switch ($action) {
         $pdo->deleteTopic($idTopic);
         $topics = $pdo->getTopics();
         include 'vues/v_discussion.php';
-        break;
-    case 'insererCommentaire':
-        $idFiche = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
-        $commentaire = filter_input(INPUT_POST, 'commentaire', FILTER_SANITIZE_STRING);
-        if (nbErreurs() !== 0) {
-            include 'vues/v_erreurs.php';
-        } else {
-            $pdo->updateXp($idCompte, 5);
-            $pdo->insertComment($idCompte, $idFiche, $commentaire);
-            header("Location: index.php?uc=gererFiche&action=visiterFiche&id=$idFiche");
-        }
-        break;
-    case 'suppressioncomm':
-        $idCom = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
-        $idFiche = filter_input(INPUT_GET, 'idfiche', FILTER_SANITIZE_NUMBER_INT);
-        $pdo->deleteComm($idCom);
-        header("Location: index.php?uc=gererFiche&action=visiterFiche&id=$idFiche");
         break;
 }

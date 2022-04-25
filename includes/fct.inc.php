@@ -6,7 +6,7 @@
  * PHP Version 7
  * PHP Version 7
  * @category  PPE
- * @package   Wiki Fiche
+ * @package   Forum
  * @link      http://www.php.net/manual/fr/book.pdo.php PHP Data Objects sur php.net
  */
 
@@ -85,57 +85,6 @@ function getRank($xp)
     }
 }
 
-function getProgressBar($xp, $lvl)
-{
-    switch ($lvl) {
-        case 1:
-?>
-            <progress max="30" value="<?php echo ($xp) ?>"></progress>
-            <img src="../images/bronze-1.png" alt="" height="40px">
-        <?php
-            break;
-        case 2:
-        ?>
-            <progress max="100" value="<?php echo ($xp) ?>"></progress>
-            <img src="../images/Silver1_rank_icon.png" alt="" height="40px">
-        <?php
-            break;
-        case 3:
-        ?>
-            <progress max="200" value="<?php echo ($xp) ?>"></progress>
-            <img src="../images/Gold1_rank_icon.png" alt="" height="40px">
-        <?php
-            break;
-        case 4:
-        ?>
-            <progress max="500" value="<?php echo ($xp) ?>"></progress>
-            <img src="../images/s4-15.png" alt="" height="40px">
-        <?php
-            break;
-        case 5:
-        ?>
-            <progress max="800" value="<?php echo ($xp) ?>"></progress>
-            <img src="../images/champion.png" alt="" height="40px">
-        <?php
-            break;
-        case 6:
-        ?>
-            <progress max="1500" value="<?php echo ($xp) ?>"></progress>
-            <img src="../images/am4sfiv1f1f11.png" alt="" height="40px">
-    <?php
-            break;
-    }
-    ?>
-    <style>
-        progress {
-            display: flex;
-            height: 25px;
-            margin-top: 10px;
-        }
-    </style>
-<?php
-
-}
 
 /**
  * Vérifie la validité des cinqs arguments : le nom, le prenom, le mdp et son doublon
@@ -240,21 +189,6 @@ function nbErreurs()
     }
 }
 
-/**
- * Vérifie la validité des trois arguments : le libelle, la description et le contenu
- * Des message d'erreurs sont ajoutés au tableau des erreurs
- *
- * @param String $libelle       titre de la fiche
- * @param String $description   description de la fiche
- * @param String $contenu       Contenu de la fiche
- *
- */
-function checkFiche($sujet, $question)
-{
-    if ($sujet == "" || $question == "") {
-        ajouterErreur('Les champs ne peuvent pas être vide');
-    }
-}
 
 /**
  * Vérifie la validité des trois arguments : le libelle, la description et le contenu
@@ -313,7 +247,7 @@ function getLibelleRole($id)
 }
 
 /**
- * Retourne le libelle d'une possible fiche
+ * Retourne le libelle d'une possible topic
  * @param type $id
  * @return retourne role du compte
  */
@@ -335,7 +269,7 @@ function getEtatCompte($id)
 /**
  * Retourne le libelle de l'état d'une compte
  * @param type $id
- * @return retourne etat de la fiche
+ * @return retourne etat de la topic
  */
 function getLibelleEtat($etat)
 {
